@@ -1,0 +1,56 @@
+name: 🎬 필름메이커스 자동 갱신
+
+# 3시간마다 자동 실행 + 수동 실행 옵션
+on:
+  schedule:
+    - cron: '0 */3 * * *'  # 매 3시간마다 (00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00)
+  workflow_dispatch:  # GitHub Actions 탭에서 수동 실행 가능
+    inputs:
+      debug:
+        description: 'Debug mode (verbose logging)'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 코드 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 🟢 Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 의존성 설치
+        run: npm install
+
+      - name: 🎬 필름메이커스 자동 갱신 실행
+        env:
+          FILMMAKERS_ID: ${{ secrets.FILMMAKERS_ID }}
+          FILMMAKERS_PW: ${{ secrets.FILMMAKERS_PW }}
+          DEBUG: ${{ github.event.inputs.debug }}
+        run: |
+          echo "🚀 자동 갱신 시작: $(date)"
+          npm run refresh
+          echo "✅ 자동 갱신 완료: $(date)"
+
+      - name: 📊 실행 결과 업로드 (실패 시)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-screenshot
+          path: error-*.png
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: 🔔 실패 알림 (선택사항)
+        if: failure()
+        run: |
+          echo "❌ 자동화 실패 - $(date)"
+          echo "로그를 확인하여 문제를 파악하세요."
+          echo "GitHub Actions 탭에서 상세 로그를 볼 수 있습니다."

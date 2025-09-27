@@ -1,17 +1,18 @@
 {
-  "name": "filmmakers-vercel",
-  "version": "1.0.0",
-  "description": "필름메이커스 자동 갱신 - Vercel Serverless",
-  "main": "index.js",
+  "name": "filmmakers-automation",
+  "version": "2.0.0",
+  "description": "필름메이커스 자동 갱신 - GitHub Actions",
+  "main": "src/refresh.js",
   "scripts": {
-    "build": "echo 'Building static site and API...' && mkdir -p public && echo 'Build complete - static site and serverless functions ready'",
+    "refresh": "node src/refresh.js",
+    "test": "DEBUG=true node src/refresh.js",
+    "build": "echo 'GitHub Actions build complete'",
     "dev": "vercel dev",
     "deploy": "vercel"
   },
   "dependencies": {
-    "chrome-aws-lambda": "10.1.0",
-    "dotenv": "^16.3.1",
-    "puppeteer-core": "10.1.0"
+    "puppeteer": "^21.5.2",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.9.0"
@@ -22,8 +23,8 @@
   "keywords": [
     "filmmakers",
     "automation",
-    "serverless",
-    "vercel"
+    "github-actions",
+    "puppeteer"
   ],
   "author": "delightroom",
   "license": "MIT"
