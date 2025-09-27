@@ -8,6 +8,6 @@
   "env": {
     "FILMMAKERS_ID": "@filmmakers_id",
     "FILMMAKERS_PW": "@filmmakers_pw",
-    "AUTH_TOKEN": "@auth_token"
+    "API_SECRET_KEY": "@api_secret_key"
   }
 }

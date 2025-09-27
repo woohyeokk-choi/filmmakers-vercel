@@ -47,7 +47,7 @@ Vercel Dashboard에서 프로젝트 선택 → **Settings** → **Environment Va
 |--------|-----|------|
 | `FILMMAKERS_ID` | `da2ssoho` | 필름메이커스 아이디 |
 | `FILMMAKERS_PW` | `success24@@` | 필름메이커스 비밀번호 |
-| `AUTH_TOKEN` | `your_secret_123` | API 보안 토큰 (선택사항) |
+| `API_SECRET_KEY` | `your_secret_123` | API 보안 토큰 (선택사항) |
 
 ⚠️ **Environment** 설정에서 **All (Production, Preview, Development)** 체크
 

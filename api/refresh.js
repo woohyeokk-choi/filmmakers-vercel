@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         // 환경변수에서 로그인 정보 가져오기
         const username = process.env.FILMMAKERS_ID;
         const password = process.env.FILMMAKERS_PW;
-        const authToken = process.env.AUTH_TOKEN;
+        const authToken = process.env.API_SECRET_KEY;
 
         // 필수 환경변수 확인
         if (!username || !password) {
