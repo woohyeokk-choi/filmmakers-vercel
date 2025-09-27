@@ -4,7 +4,7 @@ const { runAutomation } = require('../lib/filmmakers');
  * Vercel 서버리스 함수 - 필름메이커스 자동 갱신
  * Make.com에서 webhook으로 호출됩니다
  */
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     // CORS 헤더 설정
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
