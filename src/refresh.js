@@ -131,7 +131,7 @@ async function refreshPost(page) {
         log('수정 페이지 접속 중...');
 
         // 수정 페이지 접속
-        await page.goto('https://www.filmmakers.co.kr/locationBank/26555975/edit', {
+        await page.goto('https://www.filmmakers.co.kr/locationBank/26596329/edit', {
             waitUntil: 'networkidle0',
             timeout: 30000
         });
@@ -140,23 +140,40 @@ async function refreshPost(page) {
 
         log('등록 버튼 찾기 및 클릭 중...');
 
-        // 등록 버튼 찾기 및 클릭 (Python 코드와 동일)
-        const buttonClicked = await page.evaluate(() => {
+        // 등록 버튼 찾기 및 클릭 (디버그 정보 추가)
+        const buttonResult = await page.evaluate(() => {
             const buttons = document.querySelectorAll('button[type="submit"]');
+            const allButtons = document.querySelectorAll('button');
+
+            console.log(`전체 버튼 수: ${allButtons.length}`);
+            console.log(`submit 버튼 수: ${buttons.length}`);
+
+            // 모든 버튼의 텍스트 확인
+            for (let i = 0; i < allButtons.length; i++) {
+                console.log(`버튼 ${i}: "${allButtons[i].innerText}" (type: ${allButtons[i].type})`);
+            }
+
+            // submit 버튼 중 등록 버튼 찾기
             for (let i = 0; i < buttons.length; i++) {
+                console.log(`submit 버튼 ${i}: "${buttons[i].innerText}"`);
                 if (buttons[i].innerText.includes('등록')) {
                     buttons[i].click();
-                    return true;
+                    return { success: true, buttonText: buttons[i].innerText };
                 }
             }
-            return false;
+
+            return { success: false, submitButtonCount: buttons.length, totalButtonCount: allButtons.length };
         });
 
-        if (!buttonClicked) {
-            log('등록 버튼을 찾을 수 없습니다.', 'ERROR');
+        log(`버튼 찾기 결과: ${JSON.stringify(buttonResult)}`, 'DEBUG');
+
+        if (!buttonResult.success) {
+            log(`등록 버튼을 찾을 수 없습니다. Submit 버튼: ${buttonResult.submitButtonCount}개, 전체 버튼: ${buttonResult.totalButtonCount}개`, 'ERROR');
             await saveErrorScreenshot(page, new Error('등록 버튼 없음'));
             return { success: false, message: '등록 버튼을 찾을 수 없음' };
         }
+
+        log(`등록 버튼 클릭됨: "${buttonResult.buttonText}"`, 'SUCCESS');
 
         log('게시글 갱신 완료!', 'SUCCESS');
         await new Promise(resolve => setTimeout(resolve, 2000));
