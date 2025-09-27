@@ -54,14 +54,14 @@ async function login(page, username, password) {
         });
 
         // 페이지 로드 대기
-        await page.waitForTimeout(3000);
+        await new Promise(resolve => setTimeout(resolve, 3000));
 
         // 페이지 스크롤 (요소가 화면 밖에 있을 경우)
         await page.evaluate(() => {
             window.scrollTo(0, document.body.scrollHeight / 2);
         });
 
-        await page.waitForTimeout(1000);
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
         log('아이디/비밀번호 입력 중...');
 
@@ -77,7 +77,7 @@ async function login(page, username, password) {
             if (pwInput) pwInput.value = password;
         }, username, password);
 
-        await page.waitForTimeout(1000);
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
         log('로그인 버튼 클릭 중...');
 
@@ -97,7 +97,7 @@ async function login(page, username, password) {
         }
 
         // 로그인 처리 대기
-        await page.waitForTimeout(5000);
+        await new Promise(resolve => setTimeout(resolve, 5000));
 
         // 로그인 성공 확인
         try {
@@ -136,7 +136,7 @@ async function refreshPost(page) {
             timeout: 30000
         });
 
-        await page.waitForTimeout(3000);
+        await new Promise(resolve => setTimeout(resolve, 3000));
 
         log('등록 버튼 찾기 및 클릭 중...');
 
@@ -159,7 +159,7 @@ async function refreshPost(page) {
         }
 
         log('게시글 갱신 완료!', 'SUCCESS');
-        await page.waitForTimeout(2000);
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
         return { success: true, message: '갱신 완료' };
 
@@ -188,7 +188,7 @@ async function runAutomation() {
 
         // Puppeteer 브라우저 시작 (GitHub Actions 환경에서는 제약 없음)
         browser = await puppeteer.launch({
-            headless: true,
+            headless: 'new',  // 새로운 headless 모드 사용
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
@@ -211,6 +211,10 @@ async function runAutomation() {
             page.on('console', msg => log(`브라우저: ${msg.text()}`, 'DEBUG'));
             page.on('response', response => {
                 if (response.status() >= 400) {
+                    // Google 광고 관련 403 오류 무시
+                    if (response.url().includes('fundingchoicesmessages.google.com')) {
+                        return;
+                    }
                     log(`HTTP 오류: ${response.status()} ${response.url()}`, 'DEBUG');
                 }
             });
