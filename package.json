@@ -11,7 +11,7 @@
     "deploy": "vercel"
   },
   "dependencies": {
-    "puppeteer": "^21.5.2",
+    "puppeteer": "^24.10.2",
     "dotenv": "^16.3.1"
   },
   "devDependencies": {
