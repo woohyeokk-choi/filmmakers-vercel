@@ -1,7 +1,9 @@
 {
   "functions": {
     "api/refresh.js": {
-      "maxDuration": 60
+      "maxDuration": 60,
+      "runtime": "nodejs18.x",
+      "memory": 1024
     }
   },
   "regions": ["icn1"]
