@@ -1,0 +1,29 @@
+{
+  "name": "filmmakers-vercel",
+  "version": "1.0.0",
+  "description": "필름메이커스 자동 갱신 - Vercel Serverless",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel"
+  },
+  "dependencies": {
+    "puppeteer-core": "^21.5.2",
+    "@sparticuz/chromium": "^119.0.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "filmmakers",
+    "automation",
+    "serverless",
+    "vercel"
+  ],
+  "author": "delightroom",
+  "license": "MIT"
+}

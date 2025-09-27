@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/refresh.js": {
+      "maxDuration": 60
+    }
+  },
+  "regions": ["icn1"],
+  "env": {
+    "FILMMAKERS_ID": "@filmmakers_id",
+    "FILMMAKERS_PW": "@filmmakers_pw",
+    "AUTH_TOKEN": "@auth_token"
+  }
+}
