@@ -1,4 +1,6 @@
 {
+  "outputDirectory": "public",
+  "buildCommand": "pnpm run build",
   "functions": {
     "api/refresh.js": {
       "maxDuration": 60,

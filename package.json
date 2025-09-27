@@ -4,7 +4,7 @@
   "description": "필름메이커스 자동 갱신 - Vercel Serverless",
   "main": "index.js",
   "scripts": {
-    "build": "echo 'Build complete - serverless function ready'",
+    "build": "echo 'Building static site and API...' && mkdir -p public && echo 'Build complete - static site and serverless functions ready'",
     "dev": "vercel dev",
     "deploy": "vercel"
   },
