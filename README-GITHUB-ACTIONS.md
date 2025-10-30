@@ -99,7 +99,7 @@ schedule:
 
 ```javascript
 // 현재 URL
-await page.goto('https://www.filmmakers.co.kr/locationBank/26596329/edit'
+await page.goto('https://www.filmmakers.co.kr/locationBank/26845793/edit'
 
 // 다른 게시글로 변경 시
 await page.goto('https://www.filmmakers.co.kr/locationBank/YOUR_POST_ID/edit'
