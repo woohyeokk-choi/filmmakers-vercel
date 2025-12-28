@@ -130,7 +130,7 @@ async function refreshPost(page) {
         log('수정 페이지 접속 중...');
 
         // 수정 페이지 접속
-        await page.goto('https://www.filmmakers.co.kr/locationBank/26845793/edit', {
+        await page.goto('https://www.filmmakers.co.kr/locationBank/27175121/edit', {
             waitUntil: 'networkidle0',
             timeout: 30000
         });
