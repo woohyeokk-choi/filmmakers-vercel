@@ -46,7 +46,6 @@ async function saveErrorScreenshot(page, error) {
  */
 async function login(page, username, password) {
     try {
-        log('로그인 페이지 접속 중...');
 
         await page.goto('https://www.filmmakers.co.kr/member/login', {
             waitUntil: 'networkidle0',
